@@ -8,7 +8,7 @@ tysort::Param::Param()
     this->isReverse = false;
     this->isSortedAsInteger = false;
     this->memorySize = 100;
-    this->fileName = "sorted.tys";
+    this->fileName = "/Users/yunhasnawa/Desktop/sorted.tys";
 }
 
 tysort::Param::~Param()

@@ -2,6 +2,7 @@
 #define ENGINE_H
 
 #include "Param.h"
+#include "FileHandler.h"
 
 namespace tysort
 {
@@ -14,6 +15,8 @@ namespace tysort
         protected:
         private:
             Param* param;
+            FileHandler* fileHandler;
+            void initFileHandler();
     };
 }
 
