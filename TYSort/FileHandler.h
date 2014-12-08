@@ -12,7 +12,8 @@ namespace tysort
     public:
         FileHandler(std::string fileName);
         virtual ~FileHandler();
-        char* readChunk(int32_t from, int32_t to);
+        char* readChunk(size_t start, size_t size);
+        size_t fileSize();
         
     protected:
         

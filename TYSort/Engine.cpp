@@ -21,5 +21,11 @@ void tysort::Engine::initFileHandler()
 {
     this->fileHandler = new FileHandler(this->param->fileName);
     
-    this->fileHandler->readChunk(0, 3);
+    size_t fileSize = this->fileHandler->fileSize();
+    
+    printf("File Size: %ld\n", fileSize);
+    
+    char* text = this->fileHandler->readChunk(5, 15);
+    
+    printf("Read Size: %ld\n", strlen(text));
 }
