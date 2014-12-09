@@ -1,6 +1,7 @@
-#include "Param.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "Param.h"
+#include "Constants.h"
 
 tysort::Param::Param()
 {
@@ -8,7 +9,7 @@ tysort::Param::Param()
     this->isReverse = false;
     this->isSortedAsInteger = false;
     this->memorySize = 100;
-    this->fileName = "/Users/yunhasnawa/Desktop/sorted.tys";
+    this->fileName = Constant::kDefaultInputFileName;
 }
 
 tysort::Param::~Param()

@@ -11,6 +11,8 @@
 		5CFA1CB91A1D166F00712FD4 /* FileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1CB61A1D166F00712FD4 /* FileHandler.cpp */; };
 		5CFA1CBA1A1D166F00712FD4 /* Param.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1CB71A1D166F00712FD4 /* Param.cpp */; };
 		5CFA1CBC1A1D16B600712FD4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1CBB1A1D16B600712FD4 /* main.cpp */; };
+		5CFA7CE41A37513A00FCFE59 /* Constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA7CE21A37513A00FCFE59 /* Constants.cpp */; };
+		5CFA7CE71A375B9A00FCFE59 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA7CE51A375B9900FCFE59 /* Util.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +36,10 @@
 		5CFA1CB61A1D166F00712FD4 /* FileHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileHandler.cpp; sourceTree = "<group>"; };
 		5CFA1CB71A1D166F00712FD4 /* Param.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Param.cpp; sourceTree = "<group>"; };
 		5CFA1CBB1A1D16B600712FD4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5CFA7CE21A37513A00FCFE59 /* Constants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Constants.cpp; sourceTree = "<group>"; };
+		5CFA7CE31A37513A00FCFE59 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		5CFA7CE51A375B9900FCFE59 /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
+		5CFA7CE61A375B9900FCFE59 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,10 @@
 				5CFA1CB31A1D165500712FD4 /* FileHandler.h */,
 				5CFA1CB71A1D166F00712FD4 /* Param.cpp */,
 				5CFA1CB41A1D165500712FD4 /* Param.h */,
+				5CFA7CE21A37513A00FCFE59 /* Constants.cpp */,
+				5CFA7CE31A37513A00FCFE59 /* Constants.h */,
+				5CFA7CE51A375B9900FCFE59 /* Util.cpp */,
+				5CFA7CE61A375B9900FCFE59 /* Util.h */,
 			);
 			path = TYSort;
 			sourceTree = "<group>";
@@ -135,6 +145,8 @@
 			files = (
 				5CFA1CB91A1D166F00712FD4 /* FileHandler.cpp in Sources */,
 				5CFA1CB81A1D166F00712FD4 /* Engine.cpp in Sources */,
+				5CFA7CE41A37513A00FCFE59 /* Constants.cpp in Sources */,
+				5CFA7CE71A375B9A00FCFE59 /* Util.cpp in Sources */,
 				5CFA1CBC1A1D16B600712FD4 /* main.cpp in Sources */,
 				5CFA1CBA1A1D166F00712FD4 /* Param.cpp in Sources */,
 			);
@@ -250,6 +262,7 @@
 				5CFA1CB11A1D161200712FD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -16,6 +16,8 @@ char* tysort::FileHandler::readChunk(size_t start, size_t size)
 {
     size_t fileSize = this->fileSize();
     
+    if((long)fileSize < 0) return nullptr;
+    
     if((start + size) > fileSize)
         size = (fileSize - start);
     

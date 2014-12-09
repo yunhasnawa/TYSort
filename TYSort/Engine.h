@@ -17,6 +17,8 @@ namespace tysort
             Param* param;
             FileHandler* fileHandler;
             void initFileHandler();
+            char** grabFileContent(size_t offset, size_t length);
+            void playground();
     };
 }
 
