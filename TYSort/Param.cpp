@@ -19,7 +19,7 @@ tysort::Param::~Param()
 
 void tysort::Param::setMemorySize(char* argSize)
 {
-    int sizeInt = atoi(argSize);
+    size_t sizeInt = atoi(argSize);
 
     this->memorySize = sizeInt;
 }
@@ -37,6 +37,6 @@ void tysort::Param::showOnScreen()
     printf("Reverse Result   : %d\n", this->isReverse);
     printf("Sort as Integer  : %d\n", this->isSortedAsInteger);
     printf("Case Insensitive : %d\n", this->isCaseInsensitive);
-    printf("Memory size      : %d\n", this->memorySize);
+    printf("Memory size      : %zu\n", this->memorySize);
     printf("File Name        : %s\n", this->fileName.c_str());
 }

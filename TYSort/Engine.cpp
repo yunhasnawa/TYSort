@@ -1,5 +1,8 @@
 #include "Engine.h"
 #include "Util.h"
+#include <stdio.h>
+#include <iostream>
+#include <cstdlib>
 
 tysort::Engine::Engine(Param* param)
 {
@@ -11,20 +14,15 @@ tysort::Engine::Engine(Param* param)
 tysort::Engine::~Engine()
 {
     //dtor
+    
+    free(this->pool);
 }
 
 void tysort::Engine::process()
 {
-    size_t fileSize = this->fileHandler->fileSize();
-    
-    if(fileSize < 1)
-    {
-        printf("WARNING! The input file is empty!\n");
-        
-        return;
-    }
-    
-    Engine::playground();
+    this->checkFile();
+    this->createPool();
+    this->fillPool();
 }
 
 void tysort::Engine::initFileHandler()
@@ -32,20 +30,35 @@ void tysort::Engine::initFileHandler()
     this->fileHandler = new FileHandler(this->param->fileName);
 }
 
-char** tysort::Engine::grabFileContent(size_t offset, size_t length)
+void tysort::Engine::checkFile()
 {
-    char* text = this->fileHandler->readChunk(offset, 15);
+    bool isOK = this->fileHandler->isFileOK();
     
-    printf("Read Size: %ld\n", strlen(text));
-    
-    char** split = new char*[1];
-    
-    return split;
+    if(!isOK)
+    {
+        printf("ERROR! File canot be opened! Please check wheter the file exists.\n");
+        
+        exit(1);
+    }
 }
+
+void tysort::Engine::createPool()
+{
+    size_t memorySize = this->param->memorySize;
+    
+    this->pool = (char*) malloc(memorySize);
+}
+
+void tysort::Engine::fillPool()
+{
+    
+}
+
+// TEST FIELD //
 
 void tysort::Engine::playground()
 {
-    const char* testString = "Halo, saya Yoppy Yunhasnawa. Saya suaminya Rina Dewi Astuti. Saya mahasiswa di Chang Gung University. Saya sangat menyayangi orang tua dan adik-adik saya. Saya bersyukur kepada Allah SWT atas karunia-Nya kepada saya selama ini dan hingga nanti.";
+    //const char* testString = "Halo, saya Yoppy Yunhasnawa. Saya suaminya Rina Dewi Astuti. Saya mahasiswa di Chang Gung University. Saya sangat menyayangi orang tua dan adik-adik saya. Saya bersyukur kepada Allah SWT atas karunia-Nya kepada saya selama ini dan hingga nanti.";
     
     /*
     char* chunk = Util::charArrayChunk(3, 4, testString);
@@ -53,5 +66,7 @@ void tysort::Engine::playground()
     puts(chunk);
     */
     
-    Util::charArraySplit('.', testString);
+    //Util::charArraySplit('.', testString);
+    
+    //this->fileHandler->readUntilCharFound(0, '\n');
 }

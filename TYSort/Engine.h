@@ -12,13 +12,17 @@ namespace tysort
             Engine(Param* param);
             virtual ~Engine();
             void process();
+            void playground();
+        
         protected:
         private:
             Param* param;
             FileHandler* fileHandler;
+            char* pool;
             void initFileHandler();
-            char** grabFileContent(size_t offset, size_t length);
-            void playground();
+            void checkFile();
+            void createPool();
+            void fillPool();
     };
 }
 

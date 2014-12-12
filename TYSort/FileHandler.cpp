@@ -12,6 +12,11 @@ void tysort::FileHandler::initInputFileStream()
     this->inputFileStream = new std::ifstream(this->fileName, std::ifstream::binary);
 }
 
+bool tysort::FileHandler::isFileOK()
+{
+    return this->inputFileStream->is_open();
+}
+
 char* tysort::FileHandler::readChunk(size_t start, size_t size)
 {
     size_t fileSize = this->fileSize();
@@ -35,7 +40,43 @@ char* tysort::FileHandler::readChunk(size_t start, size_t size)
         //this->inputFileStream->close();
     }
     
-    printf("The obtained content: \n>>%s<<\n", text);
+    printf("The obtained content: \n------------------------\n%s\n------------------------\n", text);
+    
+    return text;
+}
+
+char* tysort::FileHandler::readUntilCharFound(size_t start, char seek)
+{
+    char* text = new char;
+    
+    if(this->inputFileStream != nullptr)
+    {
+        bool goOn = true;
+        
+        size_t seekPos = start;
+        
+        while (goOn)
+        {
+            this->inputFileStream->seekg(seekPos);
+            
+            char* buffer = new char;
+            
+            this->inputFileStream->read(buffer, 1);
+            
+            if(strcmp(buffer, &seek) != 0)
+            {
+                strcat(text, buffer);
+                
+                seekPos++;
+            }
+            else
+            {
+                goOn = false;
+            }
+        }
+    }
+    
+    printf("%s\n", text);
     
     return text;
 }

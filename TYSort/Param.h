@@ -13,7 +13,7 @@ namespace tysort
             bool isReverse;
             bool isSortedAsInteger;
             bool isCaseInsensitive;
-            int memorySize;
+            size_t memorySize;
             std::string fileName;
             void setFileName(char* argName);
             void setMemorySize(char* argSize);
