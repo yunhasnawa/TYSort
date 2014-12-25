@@ -9,6 +9,8 @@ tysort::Engine::Engine(Param* param)
 {
     this->param = param;
     
+    this->totalReadCharacters = 0;
+    
     this->initFileHandler();
 }
 
@@ -23,7 +25,20 @@ void tysort::Engine::process()
 {
     this->checkFile();
     this->createPool();
-    this->fillPool();
+    
+    long lastSeekPos = this->fileHandler->getLastSeekPos();
+    long maxSeekPos = this->fileHandler->getMaxSeekPos();
+    
+    while (this->totalReadCharacters <= maxSeekPos)
+    {
+        LinePointerList* lpl = this->fillPool();
+        
+        this->sort(lpl);
+        
+        this->clearPool();
+        
+        lastSeekPos = this->fileHandler->getLastSeekPos();
+    }
     
     this->playground();
 }
@@ -52,20 +67,24 @@ void tysort::Engine::createPool()
     this->pool = (char*) malloc(memorySize);
 }
 
-void tysort::Engine::fillPool()
+tysort::LinePointerList* tysort::Engine::fillPool()
 {
-    //size_t startPos = 0;
+    size_t start = this->totalReadCharacters;
     
-    //while (strlen(this->pool) < this->param->memorySize)
-    //{
-        //char* text = this->fileHandler->readUntilCharFound(startPos, '\n');
-        
-        //strcat(this->pool, text);
-        
-        //startPos = strlen(this->pool);
-        
-        //printf("%s\n%zd\n--\n", this->pool, strlen(this->pool));
-    //}
+    printf("----------------%zu--of--%zu--------------\n", start, this->fileHandler->getMaxSeekPos());
+    
+    LinePointerList* lpl = this->fileHandler->appendCharToMemoryBlock(this->pool, start, '\n', this->param->memorySize);
+    
+    this->totalReadCharacters += lpl->totalCharacterCount();
+    
+    return lpl;
+}
+
+void tysort::Engine::clearPool()
+{
+    delete this->pool;
+    
+    this->createPool();
 }
 
 void tysort::Engine::sort(tysort::LinePointerList *lpl)
@@ -73,13 +92,46 @@ void tysort::Engine::sort(tysort::LinePointerList *lpl)
     char** lines = lpl->firstLinePointer;
     size_t lineCount = lpl->lineCount;
     
-    for(size_t i = 0; i < lineCount; i++)
-    {
-        char* line = lines[i];
-        
-        printf("%zu) %s\n", i + 1, line);
-    }
+    //Engine::quickSort(lines, lineCount);
+    
+    lpl->print(true);
 }
+
+void tysort::Engine::quickSort(char** lines, size_t lineCount)
+{
+    if(lineCount < 2)
+        return;
+    
+    char* pivot = lines[(lineCount/2)];
+    
+    char** left = lines;
+    char** right = lines + (lineCount - 1);
+    
+    while (left <= right)
+    {
+        if(strcmp(*left, pivot) < 0)
+        {
+            left++;
+        }
+        else if(strcmp(*right, pivot) > 0)
+        {
+            right--;
+        }
+        else
+        {
+            // Swap
+            char* temp = *left;
+            *left = *right;
+            *right = temp;
+            
+            left++;
+            right--;
+        }
+    }
+    Engine::quickSort(lines, (right - lines + 1));
+    Engine::quickSort(left, (lines + lineCount - left));
+}
+
 
 // TEST FIELD //
 
@@ -121,9 +173,9 @@ void tysort::Engine::playground()
     }
      */
     
-    printf("\n===============\n");
+    //printf("\n===============\n");
     
-    LinePointerList* lpl = this->fileHandler->appendCharToMemoryBlock(this->pool, 0, '\n', this->param->memorySize);
+    //LinePointerList* lpl = this->fileHandler->appendCharToMemoryBlock(this->pool, 0, '\n', this->param->memorySize);
     
     //char** ptr = lpl->firstLinePointer;
     
@@ -164,6 +216,7 @@ void tysort::Engine::playground()
     }
     */
     
+    /*
     char** lines = lpl->firstLinePointer;
     size_t lineCount = lpl->lineCount;
     
@@ -175,6 +228,7 @@ void tysort::Engine::playground()
         
         printf("%zu) %s\n", i + 1, line);
     }
+    */
 }
 
 void tysort::Engine::quickSort(int *a, size_t n)
@@ -205,39 +259,4 @@ void tysort::Engine::quickSort(int *a, size_t n)
     }
     Engine::quickSort(a, r - a + 1);
     Engine::quickSort(l, a + n - l);
-}
-
-void tysort::Engine::quickSort(char** lines, size_t lineCount)
-{
-    if(lineCount < 2)
-        return;
-    
-    char* pivot = lines[(lineCount/2)];
-    
-    char** left = lines;
-    char** right = lines + (lineCount - 1);
-    
-    while (left <= right)
-    {
-        if(strcmp(*left, pivot) < 0)
-        {
-            left++;
-        }
-        else if(strcmp(*right, pivot) > 0)
-        {
-            right--;
-        }
-        else
-        {
-            // Swap
-            char* temp = *left;
-            *left = *right;
-            *right = temp;
-            
-            left++;
-            right--;
-        }
-    }
-    Engine::quickSort(lines, (right - lines + 1));
-    Engine::quickSort(left, (lines + lineCount - left));
 }

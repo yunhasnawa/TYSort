@@ -20,6 +20,8 @@ namespace tysort
         size_t lineCount;
         LinePointerList(char** firstLinePointer, size_t lineCount);
         virtual ~LinePointerList();
+        void print(bool fixOrder);
+        size_t totalCharacterCount();
     };
 }
 

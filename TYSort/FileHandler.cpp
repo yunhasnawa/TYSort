@@ -6,6 +6,10 @@ tysort::FileHandler::FileHandler(std::string fileName)
     this->fileName = fileName;
     
     this->initInputFileStream();
+    
+    this->lastSeekPos = -1; // Never read before
+    
+    this->maxSeekPos = this->fileSize() - 1;
 }
 
 void tysort::FileHandler::initInputFileStream()
@@ -16,6 +20,16 @@ void tysort::FileHandler::initInputFileStream()
 bool tysort::FileHandler::isFileOK()
 {
     return this->inputFileStream->is_open();
+}
+
+long tysort::FileHandler::getLastSeekPos()
+{
+    return this->lastSeekPos;
+}
+
+long tysort::FileHandler::getMaxSeekPos()
+{
+    return this->maxSeekPos;
 }
 
 char* tysort::FileHandler::readChunk(size_t start, size_t size)
@@ -100,15 +114,18 @@ tysort::LinePointerList* tysort::FileHandler::appendCharToMemoryBlock(char* bloc
     size_t pointerSize = 1;//sizeof(char**); <-- This one will consume 8 block of memory. Why??
     
     char* linePointer = block; // Pointing first memory block
+    
     //char** linePointerStorage = (char**) ((&block) + blockSize); <-- This is not working. I don't know
     
     char** linePointerStorage = (char**) (block + (blockSize - 1));
     
-    linePointerStorage += (blockSize - 1);// Pointer ke akhir blok memori
+    linePointerStorage += (blockSize - 1);// Pointer the last block of memory
     
     size_t lineLength = 0;
     
     size_t lineCount = 0;
+    
+    size_t blockFillIndex = 0;
     
     while (goOn)
     {
@@ -116,11 +133,21 @@ tysort::LinePointerList* tysort::FileHandler::appendCharToMemoryBlock(char* bloc
         
         char buffer;
         
+        //printf("%zu <-> \'%c\'\n", seekPos, buffer);
+        
         this->inputFileStream->read(&buffer, 1);
         
-        char append = buffer == delimiter ? '\0' : buffer;
+        char append = (buffer == delimiter) ? '\0' : buffer;
         
-        block[seekPos] = append;
+        if(seekPos >= (this->maxSeekPos + 1)) // Means end of file
+        {
+            append = '\0';
+            goOn = false; // No need to iterate again
+        }
+        
+        block[blockFillIndex] = append;
+        
+        this->lastSeekPos = seekPos; // Last line seek
         
         lineLength++;
         
@@ -141,10 +168,17 @@ tysort::LinePointerList* tysort::FileHandler::appendCharToMemoryBlock(char* bloc
             lineCount++; // Record total number of lines
         }
         
-        if((lastBlockIndex - seekPos) <= pointerSize)
+        long distance = (lastBlockIndex - blockFillIndex);
+        
+        if(distance <= pointerSize)
+        {
             goOn = false;
+        }
         else
+        {
             seekPos++;
+            blockFillIndex++;
+        }
     }
     
     linePointerStorage += pointerSize; // Adjust one step because last iteration shift back

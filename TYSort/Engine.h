@@ -20,10 +20,12 @@ namespace tysort
         Param* param;
         FileHandler* fileHandler;
         char* pool;
+        size_t totalReadCharacters;
         void initFileHandler();
         void checkFile();
         void createPool();
-        void fillPool();
+        LinePointerList* fillPool();
+        void clearPool();
         void sort(LinePointerList* lpl);
         static void quickSort(int* a, size_t n);
         static void quickSort(char** lines, size_t lineCount);
