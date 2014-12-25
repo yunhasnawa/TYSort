@@ -3,6 +3,7 @@
 
 #include "Param.h"
 #include "FileHandler.h"
+#include "FileWriter.h"
 #include "LinePointerList.h"
 
 namespace tysort
@@ -19,14 +20,18 @@ namespace tysort
     private:
         Param* param;
         FileHandler* fileHandler;
+        FileWriter* fileWriter;
+        size_t savedPoolCount;
         char* pool;
         size_t totalReadCharacters;
         void initFileHandler();
+        void initFileWriter();
         void checkFile();
         void createPool();
         LinePointerList* fillPool();
         void clearPool();
-        void sort(LinePointerList* lpl);
+        void sortPool(LinePointerList* lpl);
+        void savePool(LinePointerList* lpl);
         static void quickSort(int* a, size_t n);
         static void quickSort(char** lines, size_t lineCount);
     };

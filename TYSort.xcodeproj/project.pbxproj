@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C2A88B31A4C09AD00303BB7 /* LinePointerList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A88B11A4C09AD00303BB7 /* LinePointerList.cpp */; };
+		5C2A88B61A4C757700303BB7 /* FileWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C2A88B41A4C757700303BB7 /* FileWriter.cpp */; };
 		5CFA1CB81A1D166F00712FD4 /* Engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1CB51A1D166F00712FD4 /* Engine.cpp */; };
 		5CFA1CB91A1D166F00712FD4 /* FileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1CB61A1D166F00712FD4 /* FileHandler.cpp */; };
 		5CFA1CBA1A1D166F00712FD4 /* Param.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1CB71A1D166F00712FD4 /* Param.cpp */; };
@@ -31,6 +32,8 @@
 /* Begin PBXFileReference section */
 		5C2A88B11A4C09AD00303BB7 /* LinePointerList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinePointerList.cpp; sourceTree = "<group>"; };
 		5C2A88B21A4C09AD00303BB7 /* LinePointerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinePointerList.h; sourceTree = "<group>"; };
+		5C2A88B41A4C757700303BB7 /* FileWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileWriter.cpp; sourceTree = "<group>"; };
+		5C2A88B51A4C757700303BB7 /* FileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileWriter.h; sourceTree = "<group>"; };
 		5CFA1CA81A1D161200712FD4 /* TYSort */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TYSort; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFA1CB21A1D165500712FD4 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
 		5CFA1CB31A1D165500712FD4 /* FileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileHandler.h; sourceTree = "<group>"; };
@@ -88,6 +91,8 @@
 				5CFA7CE31A37513A00FCFE59 /* Constants.h */,
 				5CFA7CE51A375B9900FCFE59 /* Util.cpp */,
 				5CFA7CE61A375B9900FCFE59 /* Util.h */,
+				5C2A88B41A4C757700303BB7 /* FileWriter.cpp */,
+				5C2A88B51A4C757700303BB7 /* FileWriter.h */,
 			);
 			path = TYSort;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 				5C2A88B31A4C09AD00303BB7 /* LinePointerList.cpp in Sources */,
 				5CFA1CB81A1D166F00712FD4 /* Engine.cpp in Sources */,
 				5CFA7CE41A37513A00FCFE59 /* Constants.cpp in Sources */,
+				5C2A88B61A4C757700303BB7 /* FileWriter.cpp in Sources */,
 				5CFA7CE71A375B9A00FCFE59 /* Util.cpp in Sources */,
 				5CFA1CBC1A1D16B600712FD4 /* main.cpp in Sources */,
 				5CFA1CBA1A1D166F00712FD4 /* Param.cpp in Sources */,

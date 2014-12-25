@@ -8,4 +8,5 @@
 
 #include "Constants.h"
 
-const std::string tysort::Constant::kDefaultInputFileName = "/Users/yunhasnawa/Documents/input.tys";
+const std::string tysort::Constant::kDefaultInputFileName = "/Users/yunhasnawa/Documents/tysort/input.tys";
+const std::string tysort::Constant::kDefaultOutputFileName = "/Users/yunhasnawa/Documents/tysort/output.tys";

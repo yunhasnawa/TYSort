@@ -18,6 +18,7 @@ namespace tysort
     {
     public:
         static std::string const kDefaultInputFileName;
+        static std::string const kDefaultOutputFileName;
     };
 }
 

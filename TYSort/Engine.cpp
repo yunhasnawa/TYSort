@@ -11,7 +11,11 @@ tysort::Engine::Engine(Param* param)
     
     this->totalReadCharacters = 0;
     
+    this->savedPoolCount = 0;
+    
     this->initFileHandler();
+    
+    this->initFileWriter();
 }
 
 tysort::Engine::~Engine()
@@ -33,7 +37,9 @@ void tysort::Engine::process()
     {
         LinePointerList* lpl = this->fillPool();
         
-        this->sort(lpl);
+        this->sortPool(lpl);
+        
+        this->savePool(lpl);
         
         this->clearPool();
         
@@ -45,7 +51,12 @@ void tysort::Engine::process()
 
 void tysort::Engine::initFileHandler()
 {
-    this->fileHandler = new FileHandler(this->param->fileName);
+    this->fileHandler = new FileHandler(this->param->inputFileName);
+}
+
+void tysort::Engine::initFileWriter()
+{
+    this->fileWriter = new FileWriter(this->param->fileName);
 }
 
 void tysort::Engine::checkFile()
@@ -54,7 +65,7 @@ void tysort::Engine::checkFile()
     
     if(!isOK)
     {
-        printf("ERROR! File canot be opened! Please check wheter the file exists.\n");
+        printf("ERROR! File canot be opened! Please check whether the file exists or not.\n");
         
         exit(1);
     }
@@ -87,14 +98,25 @@ void tysort::Engine::clearPool()
     this->createPool();
 }
 
-void tysort::Engine::sort(tysort::LinePointerList *lpl)
+void tysort::Engine::sortPool(tysort::LinePointerList *lpl)
 {
     char** lines = lpl->firstLinePointer;
     size_t lineCount = lpl->lineCount;
     
-    //Engine::quickSort(lines, lineCount);
+    Engine::quickSort(lines, lineCount);
     
-    lpl->print(true);
+    //lpl->print();
+}
+
+void tysort::Engine::savePool(tysort::LinePointerList *lpl)
+{
+    std::string fileName = std::to_string((long) this->savedPoolCount);
+    
+    fileName = "pool_" + fileName + ".tyspart";
+    
+    this->fileWriter->writeToFile(fileName, lpl);
+    
+    this->savedPoolCount++;
 }
 
 void tysort::Engine::quickSort(char** lines, size_t lineCount)

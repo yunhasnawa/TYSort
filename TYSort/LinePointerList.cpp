@@ -39,12 +39,12 @@ size_t tysort::LinePointerList::totalCharacterCount()
     return totalCharacterCount;
 }
 
-void tysort::LinePointerList::print(bool fixOrder)
+void tysort::LinePointerList::print(bool reverseOrder)
 {
     char** lines = this->firstLinePointer;
     size_t numberOfLines = this->lineCount;
     
-    if(!fixOrder)
+    if(!reverseOrder)
     {
         for(size_t i = 0; i < numberOfLines; i++)
         {

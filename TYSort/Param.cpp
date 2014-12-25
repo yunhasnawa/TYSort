@@ -9,7 +9,8 @@ tysort::Param::Param()
     this->isReverse = false;
     this->isSortedAsInteger = false;
     this->memorySize = 100;
-    this->fileName = Constant::kDefaultInputFileName;
+    this->fileName = Constant::kDefaultOutputFileName;
+    this->inputFileName = Constant::kDefaultInputFileName;
 }
 
 tysort::Param::~Param()

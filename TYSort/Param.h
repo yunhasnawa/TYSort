@@ -15,6 +15,7 @@ namespace tysort
             bool isCaseInsensitive;
             size_t memorySize;
             std::string fileName;
+            std::string inputFileName;
             void setFileName(char* argName);
             void setMemorySize(char* argSize);
             void showOnScreen();
