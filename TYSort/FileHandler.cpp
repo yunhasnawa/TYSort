@@ -97,7 +97,7 @@ tysort::LinePointerList* tysort::FileHandler::appendCharToMemoryBlock(char* bloc
     
     size_t lastBlockIndex = (blockSize - 1);
     
-    size_t pointerSize = sizeof(char**);
+    size_t pointerSize = 1;//sizeof(char**); <-- This one will consume 8 block of memory. Why??
     
     char* linePointer = block; // Pointing first memory block
     //char** linePointerStorage = (char**) ((&block) + blockSize); <-- This is not working. I don't know
@@ -128,7 +128,7 @@ tysort::LinePointerList* tysort::FileHandler::appendCharToMemoryBlock(char* bloc
         {
             *linePointerStorage = linePointer; // Store current line pointer
             
-            printf("-> %s\n", *linePointerStorage);
+            //printf("-> %s\n", *linePointerStorage);
             
             linePointer += lineLength; // pluss null character
             

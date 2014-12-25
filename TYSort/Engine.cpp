@@ -68,6 +68,19 @@ void tysort::Engine::fillPool()
     //}
 }
 
+void tysort::Engine::sort(tysort::LinePointerList *lpl)
+{
+    char** lines = lpl->firstLinePointer;
+    size_t lineCount = lpl->lineCount;
+    
+    for(size_t i = 0; i < lineCount; i++)
+    {
+        char* line = lines[i];
+        
+        printf("%zu) %s\n", i + 1, line);
+    }
+}
+
 // TEST FIELD //
 
 void tysort::Engine::playground()
@@ -108,19 +121,20 @@ void tysort::Engine::playground()
     }
      */
     
-    printf("===============");
+    printf("\n===============\n");
     
     LinePointerList* lpl = this->fileHandler->appendCharToMemoryBlock(this->pool, 0, '\n', this->param->memorySize);
     
-    char** ptr = lpl->firstLinePointer;
+    //char** ptr = lpl->firstLinePointer;
     
+    /*
     char* line = *ptr;
     
     size_t lineCount = 0;
     
     while(lineCount < lpl->lineCount)
     {
-        printf("TES: %s\n", line);
+        printf("%zu) %s\n",lineCount, line);
         
         lineCount++;
         
@@ -128,4 +142,102 @@ void tysort::Engine::playground()
         
         line = *ptr;
     }
+    */
+    /*
+    for(size_t i = 0; i < lpl->lineCount; i++)
+    {
+        char* line = ptr[i];
+
+        printf("%zu) %s\n",i, line);
+    }*/
+    
+    /*
+    this->sort(lpl);
+    
+    int tesInts[10] = {1, 4, 5, 2, 3, 6, 9, 8, 7, 0};
+    
+    Engine::quickSort(tesInts, 10);
+    
+    for(int i = 0; i < 10; i++)
+    {
+        std::cout << tesInts[i];
+    }
+    */
+    
+    char** lines = lpl->firstLinePointer;
+    size_t lineCount = lpl->lineCount;
+    
+    Engine::quickSort(lines, lineCount);
+    
+    for(size_t i = 0; i < lineCount; i++)
+    {
+        char* line = lines[i];
+        
+        printf("%zu) %s\n", i + 1, line);
+    }
+}
+
+void tysort::Engine::quickSort(int *a, size_t n)
+{
+    if(n < 2)
+        return;
+    int p = a[n / 2];
+    int *l = a;
+    int *r = a + n - 1;
+    while (l <= r)
+    {
+        if (*l < p)
+        {
+            l++;
+        }
+        else if (*r > p)
+        {
+            r--;
+        }
+        else
+        {
+            int t = *l;
+            *l = *r;
+            *r = t;
+            l++;
+            r--;
+        }
+    }
+    Engine::quickSort(a, r - a + 1);
+    Engine::quickSort(l, a + n - l);
+}
+
+void tysort::Engine::quickSort(char** lines, size_t lineCount)
+{
+    if(lineCount < 2)
+        return;
+    
+    char* pivot = lines[(lineCount/2)];
+    
+    char** left = lines;
+    char** right = lines + (lineCount - 1);
+    
+    while (left <= right)
+    {
+        if(strcmp(*left, pivot) < 0)
+        {
+            left++;
+        }
+        else if(strcmp(*right, pivot) > 0)
+        {
+            right--;
+        }
+        else
+        {
+            // Swap
+            char* temp = *left;
+            *left = *right;
+            *right = temp;
+            
+            left++;
+            right--;
+        }
+    }
+    Engine::quickSort(lines, (right - lines + 1));
+    Engine::quickSort(left, (lines + lineCount - left));
 }
