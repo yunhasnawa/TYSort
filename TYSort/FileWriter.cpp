@@ -42,5 +42,18 @@ void tysort::FileWriter::writeToFile(std::string fileName, tysort::LinePointerLi
 {
     std::string filePath = this->outputFolder + "/" + fileName;
     
+    this->outputFileStream->open(filePath);
+    
+    char** lines = lpl->firstLinePointer;
+    
+    for (size_t i = 0; i < lpl->lineCount; i++)
+    {
+        char* line = lines[i];
+        
+        *(this->outputFileStream) << line << std::endl;
+    }
+    
+    this->outputFileStream->close();
+    
     printf("%s\n", filePath.c_str());
 }
