@@ -86,7 +86,7 @@ char* tysort::FileHandler::readUntilCharFound(size_t start, char seek)
     return text;
 }
 
-char** tysort::FileHandler::appendCharToMemoryBlock(char* block, size_t start, char delimiter, size_t blockSize)
+tysort::LinePointerList* tysort::FileHandler::appendCharToMemoryBlock(char* block, size_t start, char delimiter, size_t blockSize)
 {
     if(this->inputFileStream == nullptr)
         return nullptr;
@@ -107,6 +107,8 @@ char** tysort::FileHandler::appendCharToMemoryBlock(char* block, size_t start, c
     linePointerStorage += (blockSize - 1);// Pointer ke akhir blok memori
     
     size_t lineLength = 0;
+    
+    size_t lineCount = 0;
     
     while (goOn)
     {
@@ -135,6 +137,8 @@ char** tysort::FileHandler::appendCharToMemoryBlock(char* block, size_t start, c
             linePointerStorage -= pointerSize;
             
             lineLength = 0; // Reset line length for next iteration
+
+            lineCount++; // Record total number of lines
         }
         
         if((lastBlockIndex - seekPos) <= pointerSize)
@@ -145,7 +149,9 @@ char** tysort::FileHandler::appendCharToMemoryBlock(char* block, size_t start, c
     
     linePointerStorage += pointerSize; // Adjust one step because last iteration shift back
     
-    return linePointerStorage;
+    LinePointerList* lpl = new LinePointerList(linePointerStorage, lineCount);
+    
+    return lpl;
 }
 
 size_t tysort::FileHandler::fileSize()

@@ -1,8 +1,9 @@
-#include "Engine.h"
-#include "Util.h"
 #include <stdio.h>
 #include <iostream>
 #include <cstdlib>
+#include "Engine.h"
+#include "Util.h"
+#include "LinePointerList.h"
 
 tysort::Engine::Engine(Param* param)
 {
@@ -109,13 +110,19 @@ void tysort::Engine::playground()
     
     printf("===============");
     
-    char** ptr = this->fileHandler->appendCharToMemoryBlock(this->pool, 0, '\n', this->param->memorySize);
+    LinePointerList* lpl = this->fileHandler->appendCharToMemoryBlock(this->pool, 0, '\n', this->param->memorySize);
+    
+    char** ptr = lpl->firstLinePointer;
     
     char* line = *ptr;
     
-    while(line != nullptr)
+    size_t lineCount = 0;
+    
+    while(lineCount < lpl->lineCount)
     {
         printf("TES: %s\n", line);
+        
+        lineCount++;
         
         ptr += sizeof(char**);
         
