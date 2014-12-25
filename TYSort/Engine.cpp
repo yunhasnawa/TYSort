@@ -23,6 +23,8 @@ void tysort::Engine::process()
     this->checkFile();
     this->createPool();
     this->fillPool();
+    
+    this->playground();
 }
 
 void tysort::Engine::initFileHandler()
@@ -51,7 +53,18 @@ void tysort::Engine::createPool()
 
 void tysort::Engine::fillPool()
 {
+    //size_t startPos = 0;
     
+    //while (strlen(this->pool) < this->param->memorySize)
+    //{
+        //char* text = this->fileHandler->readUntilCharFound(startPos, '\n');
+        
+        //strcat(this->pool, text);
+        
+        //startPos = strlen(this->pool);
+        
+        //printf("%s\n%zd\n--\n", this->pool, strlen(this->pool));
+    //}
 }
 
 // TEST FIELD //
@@ -68,5 +81,44 @@ void tysort::Engine::playground()
     
     //Util::charArraySplit('.', testString);
     
-    //this->fileHandler->readUntilCharFound(0, '\n');
+    //size_t fileSize = this->fileHandler->fileSize();
+    
+    //printf("File size: %zu\n", fileSize);
+    /*
+    size_t read = 0;
+    
+    int readCount = 0;
+    
+    while (readCount < 2)
+    {
+        printf("Read: %zu\n", read);
+        
+        char* text = this->fileHandler->readUntilCharFound(read, '\n');
+        
+        size_t textSize = strlen(text);
+        
+        printf("Text Size: %zu\n", textSize);
+        
+        read += textSize;
+        
+        printf("Text: %s\n", text);
+        
+        readCount++;
+    }
+     */
+    
+    printf("===============");
+    
+    char** ptr = this->fileHandler->appendCharToMemoryBlock(this->pool, 0, '\n', this->param->memorySize);
+    
+    char* line = *ptr;
+    
+    while(line != nullptr)
+    {
+        printf("TES: %s\n", line);
+        
+        ptr += sizeof(char**);
+        
+        line = *ptr;
+    }
 }

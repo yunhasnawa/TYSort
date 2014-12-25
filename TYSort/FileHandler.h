@@ -14,6 +14,7 @@ namespace tysort
         virtual ~FileHandler();
         char* readChunk(size_t start, size_t size);
         char* readUntilCharFound(size_t start, char seek);
+        char** appendCharToMemoryBlock(char* block, size_t start, char delimiter, size_t blockSize);
         size_t fileSize();
         bool isFileOK();
         

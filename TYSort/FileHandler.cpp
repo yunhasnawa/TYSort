@@ -1,4 +1,5 @@
 #include "FileHandler.h"
+#include <iostream>
 
 tysort::FileHandler::FileHandler(std::string fileName)
 {
@@ -47,7 +48,11 @@ char* tysort::FileHandler::readChunk(size_t start, size_t size)
 
 char* tysort::FileHandler::readUntilCharFound(size_t start, char seek)
 {
-    char* text = new char;
+    // If you want to return a string containing
+    // one character, you have to allocate at least two characters.
+    // The first one contains the character you want to return.
+    // The second one contains the null character - '\0'
+    char* text = new char[2];
     
     if(this->inputFileStream != nullptr)
     {
@@ -59,12 +64,14 @@ char* tysort::FileHandler::readUntilCharFound(size_t start, char seek)
         {
             this->inputFileStream->seekg(seekPos);
             
-            char* buffer = new char;
+            // No need to allocate memory form the heap.
+            char buffer[2];
             
             this->inputFileStream->read(buffer, 1);
             
-            if(strcmp(buffer, &seek) != 0)
+            if( buffer[0] != seek )
             {
+                buffer[1] = '\0';
                 strcat(text, buffer);
                 
                 seekPos++;
@@ -76,9 +83,69 @@ char* tysort::FileHandler::readUntilCharFound(size_t start, char seek)
         }
     }
     
-    printf("%s\n", text);
-    
     return text;
+}
+
+char** tysort::FileHandler::appendCharToMemoryBlock(char* block, size_t start, char delimiter, size_t blockSize)
+{
+    if(this->inputFileStream == nullptr)
+        return nullptr;
+    
+    bool goOn = true;
+    
+    size_t seekPos = start;
+    
+    size_t lastBlockIndex = (blockSize - 1);
+    
+    size_t pointerSize = sizeof(char**);
+    
+    char* linePointer = block; // Pointing first memory block
+    //char** linePointerStorage = (char**) ((&block) + blockSize); <-- This is not working. I don't know
+    
+    char** linePointerStorage = (char**) (block + (blockSize - 1));
+    
+    linePointerStorage += (blockSize - 1);// Pointer ke akhir blok memori
+    
+    size_t lineLength = 0;
+    
+    while (goOn)
+    {
+        this->inputFileStream->seekg(seekPos);
+        
+        char buffer;
+        
+        this->inputFileStream->read(&buffer, 1);
+        
+        char append = buffer == delimiter ? '\0' : buffer;
+        
+        block[seekPos] = append;
+        
+        lineLength++;
+        
+        if(append == '\0')
+        {
+            *linePointerStorage = linePointer; // Store current line pointer
+            
+            printf("-> %s\n", *linePointerStorage);
+            
+            linePointer += lineLength; // pluss null character
+            
+            // Shift back because current storage already filed
+            lastBlockIndex -= pointerSize;
+            linePointerStorage -= pointerSize;
+            
+            lineLength = 0; // Reset line length for next iteration
+        }
+        
+        if((lastBlockIndex - seekPos) <= pointerSize)
+            goOn = false;
+        else
+            seekPos++;
+    }
+    
+    linePointerStorage += pointerSize; // Adjust one step because last iteration shift back
+    
+    return linePointerStorage;
 }
 
 size_t tysort::FileHandler::fileSize()
