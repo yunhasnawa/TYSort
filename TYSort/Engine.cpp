@@ -30,7 +30,6 @@ void tysort::Engine::process()
     this->checkFile();
     this->createPool();
     
-    long lastSeekPos = this->fileHandler->getLastSeekPos();
     long maxSeekPos = this->fileHandler->getMaxSeekPos();
     
     while (this->totalReadCharacters <= maxSeekPos)
@@ -42,8 +41,6 @@ void tysort::Engine::process()
         this->savePool(lpl);
         
         this->clearPool();
-        
-        lastSeekPos = this->fileHandler->getLastSeekPos();
     }
     
     this->playground();

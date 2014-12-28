@@ -14,7 +14,6 @@
 		5CFA1CBA1A1D166F00712FD4 /* Param.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1CB71A1D166F00712FD4 /* Param.cpp */; };
 		5CFA1CBC1A1D16B600712FD4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA1CBB1A1D16B600712FD4 /* main.cpp */; };
 		5CFA7CE41A37513A00FCFE59 /* Constants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA7CE21A37513A00FCFE59 /* Constants.cpp */; };
-		5CFA7CE71A375B9A00FCFE59 /* Util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFA7CE51A375B9900FCFE59 /* Util.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,8 +43,6 @@
 		5CFA1CBB1A1D16B600712FD4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		5CFA7CE21A37513A00FCFE59 /* Constants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Constants.cpp; sourceTree = "<group>"; };
 		5CFA7CE31A37513A00FCFE59 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		5CFA7CE51A375B9900FCFE59 /* Util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Util.cpp; sourceTree = "<group>"; };
-		5CFA7CE61A375B9900FCFE59 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +86,6 @@
 				5CFA1CB41A1D165500712FD4 /* Param.h */,
 				5CFA7CE21A37513A00FCFE59 /* Constants.cpp */,
 				5CFA7CE31A37513A00FCFE59 /* Constants.h */,
-				5CFA7CE51A375B9900FCFE59 /* Util.cpp */,
-				5CFA7CE61A375B9900FCFE59 /* Util.h */,
 				5C2A88B41A4C757700303BB7 /* FileWriter.cpp */,
 				5C2A88B51A4C757700303BB7 /* FileWriter.h */,
 			);
@@ -158,7 +153,6 @@
 				5CFA1CB81A1D166F00712FD4 /* Engine.cpp in Sources */,
 				5CFA7CE41A37513A00FCFE59 /* Constants.cpp in Sources */,
 				5C2A88B61A4C757700303BB7 /* FileWriter.cpp in Sources */,
-				5CFA7CE71A375B9A00FCFE59 /* Util.cpp in Sources */,
 				5CFA1CBC1A1D16B600712FD4 /* main.cpp in Sources */,
 				5CFA1CBA1A1D166F00712FD4 /* Param.cpp in Sources */,
 			);
